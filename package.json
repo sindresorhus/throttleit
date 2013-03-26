@@ -3,6 +3,10 @@
   "description": "Throttle a function",
   "version": "0.0.1",
   "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/component/throttle.git"
+  },
   "dependencies": {},
   "development": {},
   "license": "MIT",
