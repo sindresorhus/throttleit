@@ -7,7 +7,9 @@
     "type": "git",
     "url": "git://github.com/component/throttle.git"
   },
-  "dependencies": {},
+  "devDependencies": {
+    "mocha": "^1.18.0"
+  },
   "development": {},
   "license": "MIT",
   "component": {
