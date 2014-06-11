@@ -15,5 +15,8 @@
     "scripts": {
       "throttle/index.js": "index.js"
     }
+  },
+  "scripts": {
+    "test": "mocha --reporter spec"
   }
 }
