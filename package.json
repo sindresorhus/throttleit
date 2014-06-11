@@ -10,7 +10,6 @@
   "devDependencies": {
     "mocha": "^1.18.0"
   },
-  "development": {},
   "license": "MIT",
   "component": {
     "scripts": {
