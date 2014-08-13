@@ -23,7 +23,7 @@
 
 Creates a function that will call `fn` at most once every `wait` milliseconds.
 
-Supports leading and tailing invocation.
+Supports leading and trailing invocation.
 
 `fn` will receive last context (`this`) and last arguments passed to a throttled wrapper before `fn` was invoked.
 
