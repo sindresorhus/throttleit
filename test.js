@@ -2,37 +2,72 @@ var assert = require('assert');
 var throttle = require('./');
 
 describe('throttle', function(){
-  var invoked = 0;
-  var interval;
-  function count(){
-    invoked++;
-  };
-
-  afterEach(function(){
-    invoked = 0;
-    clearInterval(interval);
-  });
+  function counter() {
+    function count(){
+      count.invoked++;
+    }
+    count.invoked = 0;
+    return count;
+  }
 
   it('should throttle a function', function(done){
+    var count = counter();
     var wait = 100;
-    var total = 1000;
+    var total = 500;
     var fn = throttle(count, wait);
-    interval = setInterval(fn, 20);
+    var interval = setInterval(fn, 20);
     setTimeout(function(){
-      assert(invoked === (total / wait));
+      clearInterval(interval);
+      assert(count.invoked === (total / wait));
       done();
     }, total + 5);
   });
 
-  it('should throttle with a max', function(done){
+  it('should call the function last time', function(done){
+    var count = counter();
     var wait = 100;
-    var max = 3;
-    var total = 1000;
-    var fn = throttle(count, wait, max);
-    interval = setInterval(fn, 20);
+    var fn = throttle(count, wait);
+    fn();
+    fn();
+    assert(count.invoked === 1);
     setTimeout(function(){
-      assert(invoked === ((total / wait) * max));
+      assert(count.invoked === 2);
       done();
-    }, total + 5);
+    }, wait + 5);
   });
+
+  it('should pass last context', function(done){
+    var wait = 100;
+    var ctx;
+    var fn = throttle(logctx, wait);
+    var foo = {};
+    var bar = {};
+    fn.call(foo);
+    fn.call(bar);
+    assert(ctx === foo);
+    setTimeout(function(){
+      assert(ctx === bar);
+      done();
+    }, wait + 5);
+    function logctx() {
+      ctx = this;
+    }
+  });
+
+  it('should pass last arguments', function(done){
+    var wait = 100;
+    var args;
+    var fn = throttle(logargs, wait);
+    fn.call(null, 1);
+    fn.call(null, 2);
+    assert(args && args[0] === 1);
+    setTimeout(function(){
+      assert(args && args[0] === 2);
+      done();
+    }, wait + 5);
+    function logargs() {
+      args = arguments;
+    }
+  });
+
 });
