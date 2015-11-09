@@ -70,4 +70,16 @@ describe('throttle', function(){
     }
   });
 
+  it('should fire only once', function(done){
+    var wait = 1000;
+    var calls = 0;
+    var fn = throttle(docall, wait, true);
+    fn.call(null, 1);
+    fn.call(null, 2);
+    assert(calls == 1);
+    done()
+    function docall() {
+      calls++
+    }
+  });
 });

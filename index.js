@@ -5,10 +5,11 @@ module.exports = throttle;
  *
  * @param {Function} func Function to wrap.
  * @param {Number} wait Number of milliseconds that must elapse between `func` invocations.
+ * @param {Boolean} ignore processing calls which come in too fast
  * @return {Function} A new function that wraps the `func` function passed in.
  */
 
-function throttle (func, wait) {
+function throttle (func, wait, ignore) {
   var ctx, args, rtn, timeoutID; // caching
   var last = 0;
 
@@ -18,7 +19,10 @@ function throttle (func, wait) {
     var delta = new Date() - last;
     if (!timeoutID)
       if (delta >= wait) call();
-      else timeoutID = setTimeout(call, wait - delta);
+    else {
+      if( ignore ) return
+      timeoutID = setTimeout(call, wait - delta);
+    }
     return rtn;
   };
 
