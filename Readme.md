@@ -4,18 +4,28 @@
   Throttle a function
 
 ## Installation
+```sh
+$ component install component/throttle
+```
 
-    $ component install component/throttle
-
+```sh
+$ npm install throttleit
+```
 ## Example
 
-    var throttle = require('throttle');
-    window.onresize = throttle(resize, 200);
+```js
+// with component:
+var throttle = require('throttle');
+// with npm: 
+// var throttle = require('throttleit');
 
-    function resize(e) {
-      console.log('height', window.innerHeight);
-      console.log('width', window.innerWidth);
-    }
+window.onresize = throttle(resize, 200);
+
+function resize(e) {
+  console.log('height', window.innerHeight);
+  console.log('width', window.innerWidth);
+}
+```
 
 ## API
 
