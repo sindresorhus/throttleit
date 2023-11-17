@@ -5,7 +5,7 @@
   "keywords": [],
   "repository": {
     "type": "git",
-    "url": "git://github.com/component/throttle.git"
+    "url": "git://github.com/sindresorhus/throttleit.git"
   },
   "devDependencies": {
     "mocha": "^1.18.0"
