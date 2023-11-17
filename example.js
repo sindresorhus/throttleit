@@ -1,14 +1,15 @@
+const throttle = require('./index.js');
 
-var throttle = require('./');
+const onProgress = throttle(number => {
+	console.log(`Progress: ${number}`);
+}, 500);
 
-function onprogress(n) {
-  console.log('progress %s%', n);
-}
+let number = 0;
+const intervalId = setInterval(() => {
+	if (number > 100) {
+		clearInterval(intervalId);
+		return;
+	}
 
-onprogress = throttle(onprogress, 500);
-
-var n = 0;
-setInterval(function(){
-  if (n >= 100) return;
-  onprogress(n++);
+	onProgress(number++);
 }, 50);

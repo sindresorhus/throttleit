@@ -1,32 +1,24 @@
-module.exports = throttle;
+function throttle(function_, wait) {
+	let timeoutId;
+	let lastCallTime = 0;
 
-/**
- * Returns a new function that, when invoked, invokes `func` at most once per `wait` milliseconds.
- *
- * @param {Function} func Function to wrap.
- * @param {Number} wait Number of milliseconds that must elapse between `func` invocations.
- * @return {Function} A new function that wraps the `func` function passed in.
- */
+	return function throttled(...arguments_) { // eslint-disable-line func-names
+		clearTimeout(timeoutId);
 
-function throttle (func, wait) {
-  var ctx, args, rtn, timeoutID; // caching
-  var last = 0;
+		const now = Date.now();
+		const timeSinceLastCall = now - lastCallTime;
+		const delayForNextCall = wait - timeSinceLastCall;
 
-  return function throttled () {
-    ctx = this;
-    args = arguments;
-    var delta = new Date() - last;
-    if (!timeoutID)
-      if (delta >= wait) call();
-      else timeoutID = setTimeout(call, wait - delta);
-    return rtn;
-  };
-
-  function call () {
-    timeoutID = 0;
-    last = +new Date();
-    rtn = func.apply(ctx, args);
-    ctx = null;
-    args = null;
-  }
+		if (delayForNextCall <= 0) {
+			lastCallTime = now;
+			function_.apply(this, arguments_);
+		} else {
+			timeoutId = setTimeout(() => {
+				lastCallTime = Date.now();
+				function_.apply(this, arguments_);
+			}, delayForNextCall);
+		}
+	};
 }
+
+module.exports = throttle;
