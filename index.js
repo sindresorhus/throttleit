@@ -2,8 +2,7 @@ function throttle(function_, wait) {
 	let timeoutId;
 	let lastCallTime = 0;
 
-	return function throttled(...arguments_) {
-		// eslint-disable-line func-names
+	return function throttled(...arguments_) { // eslint-disable-line func-names
 		clearTimeout(timeoutId);
 
 		const now = Date.now();
