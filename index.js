@@ -1,4 +1,10 @@
 function throttle(function_, wait) {
+	if (typeof function_ !== 'function') {
+		throw new TypeError(`Expected the first argument to be a \`function\`, got \`${typeof function_}\`.`);
+	}
+
+	// TODO: Add `wait` validation too in the next major version.
+
 	let timeoutId;
 	let lastCallTime = 0;
 

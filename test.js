@@ -279,3 +279,13 @@ test('throttled function handles system time changes', async t => {
 	await delay(wait);
 	t.is(count.callCount, 2, 'Should allow a call after wait time');
 });
+
+test('parameter validation', t => {
+	t.throws(() => {
+		throttle(undefined, 0);
+	}, {instanceOf: TypeError});
+
+	/// t.throws(() => {
+	// 	throttle(() => {});
+	// }, {instanceOf: TypeError});
+});
