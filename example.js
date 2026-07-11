@@ -1,4 +1,4 @@
-const throttle = require('./index.js');
+import throttle from './index.js';
 
 const onProgress = throttle(number => {
 	console.log(`Progress: ${number}`);

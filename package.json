@@ -5,18 +5,17 @@
 	"license": "MIT",
 	"repository": "sindresorhus/throttleit",
 	"funding": "https://github.com/sponsors/sindresorhus",
+	"type": "module",
 	"exports": {
 		"types": "./index.d.ts",
 		"default": "./index.js"
 	},
-	"main": "./index.js",
-	"types": "./index.d.ts",
 	"sideEffects": false,
 	"engines": {
-		"node": ">=18"
+		"node": ">=22"
 	},
 	"scripts": {
-		"test": "xo && ava"
+		"test": "xo && node --test"
 	},
 	"files": [
 		"index.js",
@@ -38,12 +37,6 @@
 		"batch"
 	],
 	"devDependencies": {
-		"ava": "^5.3.1",
-		"xo": "^0.56.0"
-	},
-	"xo": {
-		"rules": {
-			"unicorn/prefer-module": "off"
-		}
+		"xo": "^4.0.0"
 	}
 }

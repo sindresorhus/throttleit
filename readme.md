@@ -35,9 +35,11 @@ throttledProcessData('Data 3');
 
 Creates a throttled function that limits calls to the original function to at most once every `wait` milliseconds. It guarantees execution after the final invocation and maintains the last context (`this`) and arguments.
 
+The throttled function returns the result of the most recent execution of the original function. When a call is deferred, it returns the result from the previous execution (or `undefined` if it has not executed yet).
+
 #### function
 
-Type: `function`
+Type: `Function`
 
 The function to be throttled.
 
@@ -46,6 +48,8 @@ The function to be throttled.
 Type: `number`
 
 The number of milliseconds to throttle invocations to.
+
+Must be a non-negative finite number.
 
 ## Related
 
